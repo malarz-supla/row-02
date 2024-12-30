@@ -114,7 +114,9 @@ void setup() {
   // Channels configuration
   // CH 1 - Relay
   auto r1 = new Supla::Control::Relay(RELAY1_GPIO);
+  r1->getChannel()->setDefault(SUPLA_CHANNELFNC_LIGHTSWITCH);
   auto r2 = new Supla::Control::Relay(RELAY2_GPIO);
+  r2->getChannel()->setDefault(SUPLA_CHANNELFNC_LIGHTSWITCH);
   // CH 2 - Action trigger
   auto at1 = new Supla::Control::ActionTrigger();
   auto at2 = new Supla::Control::ActionTrigger();
