@@ -117,7 +117,7 @@ void setup() {
   char devName[30] = {};
   auto DeviceName = new Supla::Html::CustomTextParameter(PARAM_NAME, "Nazwa urządzenia", 30);
   if (!DeviceName->getParameterValue(devName, 30)) {
-    SUPLA_LOG_DEBUG(" **** Param[%s]: settong default %s", PARAM_NAME, DEFAULT_DEV_NAME);
+    SUPLA_LOG_DEBUG(" **** Param[%s]: setting default %s", PARAM_NAME, DEFAULT_DEV_NAME);
     DeviceName->setParameterValue(DEFAULT_DEV_NAME);
   }
   if (Supla::Storage::ConfigInstance()->getString(PARAM_NAME, devName, 30)) {
