@@ -1,4 +1,4 @@
-Przykład Arduino IDE z WebIterface zrobiony na podobieństwo interejsu WWW modułu Zamel ROW-02 (dwa przełączniki + 2 przyciski). W konfiguracji można wybrać dla każdego z przycisków rodzaj łącznika (monostabilny / bistabilny) a w przypadku monostabilnych moment załączania akcji (on press / on release).
+Przykład Arduino IDE z WebIterface zrobiony na podobieństwo interejsu WWW modułu Zamel ROW-02 (dwa przełączniki + 2 przyciski). W konfiguracji można wybrać dla każdego z przycisków rodzaj łącznika (monostabilny / bistabilny) a w przypadku monostabilnych moment załączania akcji (on press / on release). Dodatkowo dodałem możliwość zmiany nazwy modułu.
 
 Przykład pewmnie nie ma wielu funkcjonalności, które są w Zamelu, jego głównym celem jest przetestowanie konfiguracji przycisków w WebInterface
 
