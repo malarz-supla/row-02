@@ -34,6 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <supla/network/html/status_led_parameters.h>
 #include <supla/network/html/wifi_parameters.h>
 #include <supla/network/html/select_input_parameter.h>
+#include <supla/network/html/custom_text_parameter.h>
 #include <supla/device/supla_ca_cert.h>
 #include <supla/events.h>
 
@@ -54,6 +55,7 @@ ESP8266HTTPUpdateServer httpUpdater;
 const char PARAM_IN1[] = "in1";
 const char PARAM_IN2[] = "in2";
 const char PARAM_TYPE[] = "inputType";
+const char PARAM_NAME[] = "devName";
 
 void setup() {
   Serial.begin(115200);
@@ -111,6 +113,21 @@ void setup() {
     SUPLA_LOG_DEBUG(" **** Param[%s]: %d", PARAM_IN2, Button2Event);
   }
 
+  #define DEFAULT_DEV_NAME "MALARZ ROW-02"
+  char devName[30] = {};
+  auto DeviceName = new Supla::Html::CustomTextParameter(PARAM_NAME, "Nazwa urządzenia", 30);
+  if (!DeviceName->getParameterValue(devName, 30)) {
+    SUPLA_LOG_DEBUG(" **** Param[%s]: settong default %s", PARAM_NAME, DEFAULT_DEV_NAME);
+    DeviceName->setParameterValue(DEFAULT_DEV_NAME);
+  }
+  if (Supla::Storage::ConfigInstance()->getString(PARAM_NAME, devName, 30)) {
+    SUPLA_LOG_DEBUG(" **** Param[%s]: %s", PARAM_NAME, devName);
+    SuplaDevice.setName(devName);
+  } else {
+    SUPLA_LOG_DEBUG(" **** Param[%s] is not set", PARAM_NAME);
+    SuplaDevice.setName(DEFAULT_DEV_NAME);
+  }
+
   // Channels configuration
   // CH 1 - Relay
   auto r1 = new Supla::Control::Relay(RELAY1_GPIO);
@@ -136,7 +153,6 @@ void setup() {
   at2->setRelatedChannel(r2);
   at2->attach(Switch2Relay);
 
-  SuplaDevice.setName("MALARZ ROW-02");
   SuplaDevice.begin();
 }
 
